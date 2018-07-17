@@ -1,0 +1,5 @@
+.idea
+.env
+.htaccess
+sftp-config.json
+yarn.lock
