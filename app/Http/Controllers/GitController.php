@@ -34,7 +34,7 @@ class GitController extends BaseController
         }
 
         //oschina
-        if($data['project']) {
+        if(isset($data['project']) ) {
             $project = isset($data['project']) ? $data['project'] : '';
             if( null == $project ) {
                 Log::info("[$tag]\tproject null commit id:{$commitId}");
