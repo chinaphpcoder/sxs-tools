@@ -33,21 +33,46 @@ class GitController extends BaseController
             return ;
         }
 
-        $project = isset($data['project']) ? $data['project'] : '';
-        if( null == $project ) {
-            Log::info("[$tag]\tproject null commit id:{$commitId}");
-            return ;
+        //oschina
+        if($data['project']) {
+            $project = isset($data['project']) ? $data['project'] : '';
+            if( null == $project ) {
+                Log::info("[$tag]\tproject null commit id:{$commitId}");
+                return ;
+            }
+            $namespace= isset($project['namespace']) ? $project['namespace'] : '';
+            if( null == $namespace ) {
+                Log::info("[$tag]\tnamespace null commit id:{$commitId}");
+                return ;
+            }
+            $name= isset($project['name']) ? $project['name'] : '';
+            if( null == $name ) {
+                Log::info("[$tag]\tname null commit id:{$commitId}");
+                return ;
+            }
+        } else {
+            $repository = isset($data['repository']) ? $data['repository'] : '';
+            if( null == $repository ) {
+                Log::info("[$tag]\trepository null commit id:{$commitId}");
+                return ;
+            }
+            $full_name= isset($repository['full_name']) ? $repository['full_name'] : '';
+            if( null == $full_name ) {
+                Log::info("[$tag]\tfull_name null commit id:{$commitId}");
+                return ;
+            }
+            list($namespace,$name) = explode($full_name, '/');
+            if( null == $namespace ) {
+                Log::info("[$tag]\tnamespace null commit id:{$commitId}");
+                return ;
+            }
+            if( null == $name ) {
+                Log::info("[$tag]\tname null commit id:{$commitId}");
+                return ;
+            }
         }
-        $namespace= isset($project['namespace']) ? $project['namespace'] : '';
-        if( null == $namespace ) {
-            Log::info("[$tag]\tnamespace null commit id:{$commitId}");
-            return ;
-        }
-        $name= isset($project['name']) ? $project['name'] : '';
-        if( null == $name ) {
-            Log::info("[$tag]\tname null commit id:{$commitId}");
-            return ;
-        }
+
+        
         $branch = isset($data['ref']) ? $data['ref'] : '';
         $branch = substr($branch,11);
 
