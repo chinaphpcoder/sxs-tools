@@ -27,28 +27,28 @@ class GitController extends BaseController
             return ;
         }
 
-        $commitId = $data['after'];
+        $commitId = isset($data['after']) ? $data['after'] : '';
         if( null == $commitId ) {
             Log::info("[$tag]\tcommit id null srcdata:{$jsonData}");
             return ;
         }
 
-        $project = $data['project'];
+        $project = isset($data['project']) ? $data['project'] : '';
         if( null == $project ) {
             Log::info("[$tag]\tproject null commit id:{$commitId}");
             return ;
         }
-        $namespace= $project['namespace'];
+        $namespace= isset($project['namespace']) ? $project['namespace'] : '';
         if( null == $namespace ) {
             Log::info("[$tag]\tnamespace null commit id:{$commitId}");
             return ;
         }
-        $name= $project['name'];
+        $name= isset($project['name']) ? $project['name'] : '';
         if( null == $name ) {
             Log::info("[$tag]\tname null commit id:{$commitId}");
             return ;
         }
-        $branch = $data['ref'];
+        $branch = isset($data['ref']) ? $data['ref'] : '';
         $branch = substr($branch,11);
 
         if( null == $branch ) {
