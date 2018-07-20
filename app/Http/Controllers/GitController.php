@@ -61,7 +61,7 @@ class GitController extends BaseController
                 Log::info("[$tag]\tfull_name null commit id:{$commitId}");
                 return ;
             }
-            list($namespace,$name) = explode($full_name, '/');
+            list($namespace,$name) = explode('/',$full_name);
             if( null == $namespace ) {
                 Log::info("[$tag]\tnamespace null commit id:{$commitId}");
                 return ;
